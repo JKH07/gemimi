@@ -1,0 +1,305 @@
+:root {
+  --sky-top: #eaf3f8;
+  --sky-bottom: #cfe6ee;
+  --ridge-far: #b7d6de;
+  --ridge-mid: #6e9cab;
+  --ridge-near: #365a66;
+  --ink: #1e2e33;
+  --ink-soft: #4c6570;
+  --moon: #f4e9c9;
+  --firefly: #f2c879;
+  --surface: rgba(247, 251, 252, 0.86);
+  --rule: rgba(30, 46, 51, 0.14);
+  --max-w: 640px;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+}
+
+body {
+  font-family: "Work Sans", sans-serif;
+  color: var(--ink);
+  background: var(--sky-bottom);
+  overflow-x: hidden;
+}
+
+h1, h2, h3 {
+  font-family: "Newsreader", serif;
+  font-weight: 500;
+  margin: 0 0 0.4em;
+  color: var(--ink);
+}
+
+h1 { font-size: clamp(2.4rem, 5vw, 3.4rem); line-height: 1.1; }
+h2 { font-size: 1.5rem; }
+h3 { font-size: 1.2rem; margin-bottom: 0.2em; }
+
+p { line-height: 1.6; margin: 0 0 1em; max-width: var(--max-w); }
+
+a { color: inherit; }
+
+/* ---------- background scene ---------- */
+
+.scene {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  overflow: hidden;
+}
+
+.sky {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, var(--sky-top) 0%, var(--sky-bottom) 75%);
+}
+
+.moon {
+  position: absolute;
+  top: 12%;
+  right: 14%;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 32%, #fffdf4 0%, var(--moon) 55%, rgba(244, 233, 201, 0) 75%);
+  box-shadow: 0 0 60px 20px rgba(244, 233, 201, 0.35);
+}
+
+.ridge {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 55%;
+}
+
+.ridge path { fill: currentColor; }
+.ridge-far { color: var(--ridge-far); height: 60%; opacity: 0.9; }
+.ridge-mid { color: var(--ridge-mid); height: 50%; opacity: 0.95; }
+.ridge-near { color: var(--ridge-near); height: 40%; }
+
+.mist {
+  position: absolute;
+  left: 0; right: 0;
+  bottom: 8%;
+  height: 22%;
+  background: linear-gradient(180deg, rgba(234, 243, 248, 0) 0%, rgba(234, 243, 248, 0.65) 60%, rgba(234, 243, 248, 0) 100%);
+  filter: blur(2px);
+}
+
+#fireflies {
+  position: absolute;
+  inset: 0;
+}
+
+.firefly {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--firefly);
+  box-shadow: 0 0 6px 2px rgba(242, 200, 121, 0.8);
+  animation: drift 14s ease-in-out infinite;
+}
+
+@keyframes drift {
+  0%   { transform: translate(0, 0); opacity: 0; }
+  10%  { opacity: 0.9; }
+  50%  { transform: translate(18px, -30px); }
+  90%  { opacity: 0.7; }
+  100% { transform: translate(-10px, -60px); opacity: 0; }
+}
+
+/* ---------- header / nav ---------- */
+
+.site-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 28px clamp(20px, 6vw, 64px) 0;
+}
+
+.wordmark {
+  font-family: "Newsreader", serif;
+  font-style: italic;
+  font-size: 1.15rem;
+  text-decoration: none;
+}
+
+.site-header nav a {
+  text-decoration: none;
+  margin-left: 24px;
+  font-size: 0.92rem;
+  color: var(--ink-soft);
+  border-bottom: 1px solid transparent;
+  padding-bottom: 2px;
+}
+
+.site-header nav a.current,
+.site-header nav a:hover {
+  color: var(--ink);
+  border-bottom-color: var(--ink);
+}
+
+/* ---------- main / hero ---------- */
+
+main {
+  padding: 0 clamp(20px, 6vw, 64px);
+}
+
+.hero {
+  min-height: 78vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 720px;
+}
+
+.eyebrow-line {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  margin-bottom: 0.6em;
+}
+
+.tagline {
+  font-family: "Newsreader", serif;
+  font-size: 1.2rem;
+  color: var(--ink-soft);
+  max-width: var(--max-w);
+}
+
+.hero-body.small { font-size: 0.95rem; }
+
+/* ---------- content sections ---------- */
+
+.section-block {
+  padding: 56px 0;
+  border-top: 1px solid var(--rule);
+  max-width: 760px;
+}
+
+.section-block.quiet { color: var(--ink-soft); }
+
+.project-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.project-text { max-width: 480px; }
+
+.project-link {
+  text-decoration: none;
+  font-size: 0.95rem;
+  white-space: nowrap;
+  border-bottom: 1px solid var(--ink);
+  padding-bottom: 2px;
+}
+
+.site-footer {
+  display: flex;
+  justify-content: space-between;
+  padding: 32px clamp(20px, 6vw, 64px) 40px;
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+}
+
+/* ---------- app page ---------- */
+
+.typed-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  font-family: "JetBrains Mono", monospace;
+  font-size: clamp(2.5rem, 9vw, 6.5rem);
+  color: rgba(54, 90, 102, 0.14);
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.cursor {
+  animation: blink 1s step-start infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+.app-main { padding-top: 4vh; }
+
+.app-hero {
+  min-height: 82vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 640px;
+}
+
+.pronunciation {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+}
+
+.downloads {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(160px, 220px));
+  gap: 12px;
+  margin: 20px 0 16px;
+}
+
+.download-btn {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  text-decoration: none;
+  padding: 14px 16px;
+  border: 1px solid var(--ink);
+  border-radius: 4px;
+  background: var(--surface);
+}
+
+.download-btn:hover {
+  background: var(--ink);
+  color: var(--sky-top);
+}
+
+.download-btn:hover .dl-meta { color: inherit; opacity: 0.75; }
+
+.dl-label { font-weight: 600; }
+.dl-meta { font-size: 0.78rem; color: var(--ink-soft); }
+
+.hint {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  max-width: 480px;
+}
+
+/* ---------- responsive ---------- */
+
+@media (max-width: 560px) {
+  .downloads { grid-template-columns: 1fr 1fr; }
+  .moon { width: 56px; height: 56px; top: 8%; right: 10%; }
+}
+
+/* ---------- accessibility ---------- */
+
+a:focus-visible,
+.download-btn:focus-visible {
+  outline: 2px solid var(--ink-near, var(--ink));
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .firefly, .cursor { animation: none; }
+}
